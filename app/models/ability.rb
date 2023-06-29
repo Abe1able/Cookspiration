@@ -10,7 +10,7 @@ class Ability
 
     return unless user.role == 'admin'
 
-    can :manage, :alls
+    can :manage, :all
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
