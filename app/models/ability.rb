@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
     return unless user.present?
 
-    can :manage, Recipe, user: user
+    can(:manage, RecipeFood, user:)
 
     return unless user.role == 'admin'
 
