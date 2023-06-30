@@ -32,6 +32,10 @@ class FoodsController < ApplicationController
     redirect_to foods_path, notice: 'Food item was successfully deleted.'
   end
 
+  def generate_list
+    redirect_to shopping_list_path(params[:recipe_id])
+  end
+
   private
 
     # Only allow a list of trusted parameters through.
