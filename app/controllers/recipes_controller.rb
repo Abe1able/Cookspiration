@@ -40,6 +40,10 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
+  def generate_list
+    redirect_to shopping_list_path(params[:recipe_id])
+  end
+
   private
     def params_recipe
       params.require(:recipe).permit(:name, :preparation_time, :description, :public, :cooking_time)
