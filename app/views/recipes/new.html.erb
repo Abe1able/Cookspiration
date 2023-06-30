@@ -1,9 +1,27 @@
-<h1>New recipe</h1>
+<%= form_with model: @recipe, url: recipes_path, method: :post, local: true, scope: :recipe do |form| %>
+  <div>
+    <div>
+      <%= form.text_field :name, placeholder: 'Name'  %>
+    </div>
 
-<%= render "form", recipe: @recipe %>
+    <div>
+      <%= form.number_field :preparation_time, placeholder: 'Preparation time (mins)'  %>
+    </div>
 
-<br>
+     <div>
+      <%= form.number_field :cooking_time, placeholder: 'Cooking time (mins)'  %>
+    </div>
 
-<div>
-  <%= link_to "Back to recipes", recipes_path %>
-</div>
+    <div>
+      <%= form.text_area :description, placeholder: 'Description' %>
+    </div>
+
+     <div>
+      <%= form.label :public %>
+      <%= form.check_box :public %>
+    </div>
+
+
+    <%= form.submit "Add Recipe"%>
+  </div>
+<% end %>

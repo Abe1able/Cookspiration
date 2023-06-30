@@ -75,3 +75,5 @@ end
 
 gem 'devise'
 
+# Add authorization
+gem 'cancancan'
