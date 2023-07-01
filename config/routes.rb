@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
-  # resources :recipe_foods
-  # resources :foods
-  # resources :recipes
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  devise_scope :user do
-    authenticated :user do
-      root 'recipes#index', as: :authenticated_root
+
+  authenticated :user do
+    root 'foods#index', as: :authenticated_root
+
+    resources :foods, only: %i[index new create destroy]
+    resources :recipes, only: %i[index show new create destroy] do
+      # member do
+      #   post 'toggle_public'
+      #   get 'shopping_list'
+      # end
+      resources :foods, only: [:new, :create]
+      resources :recipe_foods, only: [:new, :create,  :update,  :destroy],  except: [:show]
     end
+    # resources :recipe_foods, only: %i[create update destroy]
+    resources :public_recipes, only: %i[index show]
+    resources :general_shopping_list, only: [:index ,:show]
+      # get 'shopping_list', on: :member
+    # end
   end
-  
-  root 'foods#index'
-  resources :foods , only: %i[index show]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-
-  resources :recipes, only: [:index, :show, :new, :create, :destroy] do
-    resources :recipe_foods, only: [:new, :create, :destroy, :edit, :update]
-  end
+  get '/recipes/shopping_list', to: 'recipes#shopping_list'
+  root 'public_recipes#index'
 end
+

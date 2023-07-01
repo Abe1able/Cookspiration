@@ -1,14 +1,25 @@
-<p style="color: green"><%= notice %></p>
+<section class="foodList">
 
-<h1>Foods</h1>
+  <%= link_to 'Add Food', new_food_path, class: 'btn' %>
 
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
-</div>
-
-
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Measurement Unit</th>
+        <th>Unit Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @foods.includes(:user).each do |food| %>
+        <tr>
+          <td><%= food.name %></td>
+          <td><%= food.measurement_unit %></td>
+          <td>$<%= food.price %></td>
+          <td><%= button_to 'Delete', food_path(food), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
