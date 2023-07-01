@@ -17,10 +17,10 @@ Rails.application.routes.draw do
     resources :public_recipes, only: %i[index show]
     resources :general_shopping_list, only: [:index ,:show]
       # get 'shopping_list', on: :member
-    end
+    # end
   end
 
   get '/recipes/shopping_list', to: 'recipes#shopping_list'
-
   root 'public_recipes#index'
 end
+
